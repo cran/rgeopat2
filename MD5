@@ -1,11 +1,11 @@
-fcff5aa855b693e9f761580749c20b8b *DESCRIPTION
+6529d21109bc6190eb04472abe9236b3 *DESCRIPTION
 35d3fb975302068fa81f5ab2fbbbecfa *LICENSE
 3e62bdd6a6b0304523d79b38db09e9b0 *NAMESPACE
 7af00e6f6afb59ba84e449e93263e710 *R/british_isles.R
-9cb9233ee6b7ec3a8c064cc0d66e478c *R/gpat_gridcreate.R
+e55e93fdc089fba203e19ff13e46bbaf *R/gpat_gridcreate.R
 a5181c963d77d411a53256715450a7e2 *R/gpat_read_distmtx.R
 eba4d37e0d3f9d37b2c1dc321393e1dd *R/rgeopat2-package.r
-bbed418c6ecfa3c3b7c1415be09ab2df *README.md
+a4c4f5f4fa2edcf6b2ec40bf69f3362d *README.md
 cb2dfd3fdade705b6ba511b779d34068 *data/british_isles.rda
 9f06da14eed970bd2d2e9d5a85a66a76 *inst/rawdata/Augusta2011_grid100.hdr
 45c590df7576787a5519b01b519eddeb *inst/rawdata/Augusta2011_grid_size_shift.hdr

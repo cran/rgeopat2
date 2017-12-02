@@ -1,6 +1,6 @@
 Package: rgeopat2
 Title: Additional Functions for 'geoPAT' 2.0
-Version: 0.1.2
+Version: 0.1.4
 Authors@R: c(person("Jakub", "Nowosad", 
     email = "nowosad.jakub@gmail.com",
     role = c("aut", "cre"),
@@ -21,9 +21,9 @@ Suggests: covr, testthat, tidyverse
 URL: https://github.com/Nowosad/rgeopat2
 BugReports: https://github.com/Nowosad/rgeopat2/issues
 NeedsCompilation: no
-Packaged: 2017-11-01 16:25:07 UTC; jakub
+Packaged: 2017-12-02 18:58:37 UTC; jn
 Author: Jakub Nowosad [aut, cre] (0000-0002-1057-3721),
   Space Informatics Lab [cph]
 Maintainer: Jakub Nowosad <nowosad.jakub@gmail.com>
 Repository: CRAN
-Date/Publication: 2017-11-02 14:40:45 UTC
+Date/Publication: 2017-12-02 19:04:41 UTC

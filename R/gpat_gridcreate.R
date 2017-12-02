@@ -69,8 +69,13 @@ gpat_header_parser = function(x){
   # extract size and shift
   desc = str_split(x[13], "\\|", simplify = TRUE)
   size = as.numeric(desc[str_which(desc, "-z")+1])
+  if (length(size) == 0){
+    size = as.numeric(gsub("\\D", "", desc[str_which(desc, "--size=")]))
+  }
   shift = as.numeric(desc[str_which(desc, "-f")+1])
-
+  if (length(shift) == 0){
+    shift = as.numeric(gsub("\\D", "", desc[str_which(desc, "--shift=")]))
+  }
   # test if size != shift
   if (size != shift){
     stop("We don't support overlapping grids (where size != shift). Open a new issue on our github page if you want this option")
@@ -139,7 +144,7 @@ gpat_st_make_grid = function(x,
     }
   }
 
-  my_grid = st_sf(st_sfc(ret, crs = st_crs(x)))
+  my_grid = st_sf(geometry = st_sfc(ret, crs = st_crs(x)))
 
   if (brick){
     ids_y = rep(c(1, 1, 2, 2), length.out = ny) # rows groups
