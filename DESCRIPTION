@@ -1,6 +1,6 @@
 Package: rgeopat2
 Title: Additional Functions for 'geoPAT' 2.0
-Version: 0.1.4
+Version: 0.2.0
 Authors@R: c(person("Jakub", "Nowosad", 
     email = "nowosad.jakub@gmail.com",
     role = c("aut", "cre"),
@@ -11,7 +11,7 @@ Description: Supports analysis of spatial data processed with the 'geoPAT' 2.0
     software <http://sil.uc.edu/cms/index.php?id=geopat2>. 
     Available features include creation of a grid based on the 'geoPAT' 2.0
     grid header file.
-Depends: R (>= 3.4.1)
+Depends: R (>= 3.3.0)
 Imports: readr, sf, stringr
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -21,9 +21,9 @@ Suggests: covr, testthat, tidyverse
 URL: https://github.com/Nowosad/rgeopat2
 BugReports: https://github.com/Nowosad/rgeopat2/issues
 NeedsCompilation: no
-Packaged: 2017-12-02 18:58:37 UTC; jn
-Author: Jakub Nowosad [aut, cre] (0000-0002-1057-3721),
+Packaged: 2018-01-27 22:16:26 UTC; jn
+Author: Jakub Nowosad [aut, cre] (<https://orcid.org/0000-0002-1057-3721>),
   Space Informatics Lab [cph]
 Maintainer: Jakub Nowosad <nowosad.jakub@gmail.com>
 Repository: CRAN
-Date/Publication: 2017-12-02 19:04:41 UTC
+Date/Publication: 2018-01-27 22:25:08 UTC
