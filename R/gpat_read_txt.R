@@ -3,12 +3,12 @@
 #' Read a text output of the geoPAT 2.0 functions into R
 #'
 #' @param x A filepath to the geoPAT 2.0 text file
-#' @param signature A signature used to create a geoPAT 2.0 text output (supported signatures: "lind", "linds")
+#' @param signature A signature used to create the geoPAT 2.0 text output (supported signatures: "lind", "linds")
 #'
 #' @return data.frame
 #'
 #' @importFrom readr read_delim
-#' @importFrom stringr str_extract
+#' @importFrom stringr str_detect str_extract str_replace_all str_split
 #'
 #' @examples
 #' polygon_filepath = system.file("rawdata/Augusta2011_polygon.txt", package = "rgeopat2")
@@ -23,28 +23,44 @@
 #' linds_filepath = system.file("rawdata/Augusta2011_linds.txt", package = "rgeopat2")
 #' my_linds = gpat_read_txt(linds_filepath, signature = "linds")
 #'
+#' grid_filepath = system.file("rawdata/Augusta2011_grid100.txt", package = "rgeopat2")
+#' my_grid = gpat_read_txt(grid_filepath)
+#'
+#' gridlinds_filepath = system.file("rawdata/Augusta2011_grid_linds.txt", package = "rgeopat2")
+#' my_grid = gpat_read_txt(gridlinds_filepath, signature = "linds")
+#'
 #' @export
 gpat_read_txt = function(x, signature = NULL){
   df = suppressMessages(read_delim(x, delim = ",", col_names = FALSE, progress = FALSE))
-  obj_name = str_extract(df$X2, '"([^"]*)"') %>% str_extract("\\(?[0-9,.]+\\)?")
+  obj_desc = str_extract(df$X2, '"([^"]*)"') %>% str_replace_all('\"', "")
   clean_first_col = df$X2 %>%
     gsub("(?)(.*)(?=>)", "", ., perl = TRUE) %>%
     gsub("\\> ", "", ., perl = TRUE) %>%
     as.numeric() %>%
     data.frame(X1 = ., stringsAsFactors = FALSE)
-  df = cbind(clean_first_col, df[- c(1, 2)])
+  df = cbind(clean_first_col, df[-c(1, 2)])
   if (is.null(signature)){
     names(df) = paste0("X", seq_along(df))
   } else if (signature == "lind"){
     n = (length(df) - length(landscape_level)) / length(class_level)
     names(df) = c(landscape_level, paste0(rep(class_level, each = n), "_", seq_len(n)))
   } else if (signature == "linds"){
-    n = (length(df) - length(landscape_level)) / length(class_level)
+    n = (length(df) - length(landscape_level))
     names(df) = c(landscape_level, paste0("pland", "_", seq_len(n)))
-  } else {
-    stop("This signature is not supported")
   }
-  df$name = as.numeric(obj_name)
+  if (str_detect(obj_desc[1], "cat")){
+    obj_name = str_extract(obj_desc, "\\(?[0-9,.]+\\)?") %>% as.numeric
+    df$cat = obj_name
+  } else if (str_detect(obj_desc[1], "loc")){
+    obj_name = str_extract(obj_desc, "\\(?[0-9,.]+\\)?") %>% as.numeric
+    df$loc = obj_name
+  } else{
+    obj_desc = str_split(obj_desc, "_", simplify = TRUE)
+    col_n = obj_desc[, ncol(obj_desc) - 1]
+    row_n = obj_desc[, ncol(obj_desc)]
+    df$col = as.numeric(col_n) + 1
+    df$row = as.numeric(row_n) + 1
+  }
   return(df)
 }
 

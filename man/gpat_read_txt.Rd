@@ -9,7 +9,7 @@ gpat_read_txt(x, signature = NULL)
 \arguments{
 \item{x}{A filepath to the geoPAT 2.0 text file}
 
-\item{signature}{A signature used to create a geoPAT 2.0 text output (supported signatures: "lind", "linds")}
+\item{signature}{A signature used to create the geoPAT 2.0 text output (supported signatures: "lind", "linds")}
 }
 \value{
 data.frame
@@ -29,5 +29,11 @@ my_lind = gpat_read_txt(lind_filepath, signature = "lind")
 
 linds_filepath = system.file("rawdata/Augusta2011_linds.txt", package = "rgeopat2")
 my_linds = gpat_read_txt(linds_filepath, signature = "linds")
+
+grid_filepath = system.file("rawdata/Augusta2011_grid100.txt", package = "rgeopat2")
+my_grid = gpat_read_txt(grid_filepath)
+
+gridlinds_filepath = system.file("rawdata/Augusta2011_grid_linds.txt", package = "rgeopat2")
+my_grid = gpat_read_txt(gridlinds_filepath, signature = "linds")
 
 }
