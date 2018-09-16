@@ -2,18 +2,18 @@
 % Please edit documentation in R/gpat_read_distmtx.R
 \name{gpat_read_distmtx}
 \alias{gpat_read_distmtx}
-\title{Read a geoPAT distance matrix}
+\title{Read a GeoPAT distance matrix}
 \usage{
 gpat_read_distmtx(x)
 }
 \arguments{
-\item{x}{A filepath to the geoPAT 2.0 distance matrix file}
+\item{x}{A filepath to the geoPAT 2 distance matrix file}
 }
 \value{
 dist
 }
 \description{
-Read a geoPAT distance matrix into R
+Read a GeoPAT distance matrix into R
 }
 \examples{
 distmtx_filepath = system.file("rawdata/Augusta2011_matrix_grid.csv", package="rgeopat2")
