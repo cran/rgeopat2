@@ -1,6 +1,6 @@
 Package: rgeopat2
 Title: Additional Functions for 'GeoPAT' 2
-Version: 0.2.6
+Version: 0.3.9
 Authors@R: c(person("Jakub", "Nowosad", 
     email = "nowosad.jakub@gmail.com",
     role = c("aut", "cre"),
@@ -16,14 +16,14 @@ Imports: readr, sf, stringr
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 7.0.2
 Suggests: covr, testthat
 URL: https://github.com/Nowosad/rgeopat2
 BugReports: https://github.com/Nowosad/rgeopat2/issues
 NeedsCompilation: no
-Packaged: 2018-09-16 07:20:16 UTC; jn
+Packaged: 2020-03-08 12:16:16 UTC; jn
 Author: Jakub Nowosad [aut, cre] (<https://orcid.org/0000-0002-1057-3721>),
   Space Informatics Lab [cph]
 Maintainer: Jakub Nowosad <nowosad.jakub@gmail.com>
 Repository: CRAN
-Date/Publication: 2018-09-16 07:40:02 UTC
+Date/Publication: 2020-03-08 12:30:02 UTC

@@ -3,7 +3,8 @@
 #' Read a text output of the GeoPAT 2 functions into R
 #'
 #' @param x A filepath to the GeoPAT 2 text file
-#' @param signature A signature used to create the GeoPAT 2 text output (supported signatures: "lind", "linds")
+#' @param signature A signature used to create the GeoPAT 2 text output
+#'        (supported signatures: "lind", "linds", "ent", and "ts")
 #'
 #' @return data.frame
 #'
@@ -29,9 +30,16 @@
 #' gridlinds_filepath = system.file("rawdata/Augusta2011_grid_linds.txt", package = "rgeopat2")
 #' my_grid = gpat_read_txt(gridlinds_filepath, signature = "linds")
 #'
+#' gridts_filepath = system.file("rawdata/barent_ts_grd.txt", package = "rgeopat2")
+#' my_gridts = gpat_read_txt(gridts_filepath, signature = "ts")
+#'
 #' @export
 gpat_read_txt = function(x, signature = NULL){
-  df = suppressMessages(read_delim(x, delim = ",", col_names = FALSE, progress = FALSE))
+  df = suppressMessages(readr::read_delim(x, delim = ",", col_names = FALSE, progress = FALSE))
+  if (!is.null(signature) && signature == "ts"){
+    df$X2 = paste0(df$X2, df$X3)
+    df$X3 = NULL
+  }
   obj_desc = str_extract(df$X2, '"([^"]*)"') %>% str_replace_all('\"', "")
   clean_first_col = df$X2 %>%
     gsub("(?)(.*)(?=>)", "", ., perl = TRUE) %>%
@@ -39,7 +47,7 @@ gpat_read_txt = function(x, signature = NULL){
     as.numeric() %>%
     data.frame(X1 = ., stringsAsFactors = FALSE)
   df = cbind(clean_first_col, df[-c(1, 2)])
-  if (is.null(signature)){
+  if (is.null(signature) || signature == "ts"){
     names(df) = paste0("X", seq_along(df))
   } else if (signature == "lind"){
     n = (length(df) - length(landscape_level)) / length(class_level)
@@ -47,12 +55,14 @@ gpat_read_txt = function(x, signature = NULL){
   } else if (signature == "linds"){
     n = (length(df) - length(landscape_level))
     names(df) = c(landscape_level, paste0("pland", "_", seq_len(n)))
+  } else if (signature == "ent"){
+    names(df) = c("Shannon_entropy", "number_of_categories", "object_size")
   }
   if (str_detect(obj_desc[1], "cat")){
-    obj_name = str_extract(obj_desc, "\\(?[0-9,.]+\\)?") %>% as.numeric
+    obj_name = str_extract(obj_desc, "\\(?[0-9,.]+\\)?") %>% as.numeric()
     df$cat = obj_name
   } else if (str_detect(obj_desc[1], "loc")){
-    obj_name = str_extract(obj_desc, "\\(?[0-9,.]+\\)?") %>% as.numeric
+    obj_name = str_extract(obj_desc, "\\(?[0-9,.]+\\)?") %>% as.numeric()
     df$loc = obj_name
   } else{
     obj_desc = str_split(obj_desc, "_", simplify = TRUE)
